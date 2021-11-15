@@ -1,3 +1,4 @@
+import * as React from 'react'
 import copyToClipboardPolyfill from "utils/copyToClipboardPolyfill";
 import css from "lib/x/tpl";
 import dataset from "data/dataset";
