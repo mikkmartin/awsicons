@@ -27,17 +27,12 @@ var walk = function (dir, done) {
 
 walk("./", (_, paths) => {
 	paths.forEach((path) => {
-		if (path.endsWith(".js")) {
-			console.log(path);
-		}
+		if (path.endsWith(".js") && !path.includes("index.js")) console.log(path);
 	});
 });
 
-/*
-fs.readFile(
-	"./Arch_Analytics/Arch_32/ArchAmazonKinesisDataStreams32.js",
-	"utf-8",
-	function (err, data) {
+const overWrite = (path) => {
+	fs.readFile(path, "utf-8", function (err, data) {
 		if (err) throw err;
 		//find the svg group with <g fill="none" fillRule="evenodd">
 		const grouptagIndexes = {
@@ -67,9 +62,8 @@ fs.readFile(
 			.replace(props, 'viewBox="0 0 40 40"')
 			.replace(background, "")
 			.replace('fill="#FFF"', fillAttr);
-        fs.writeFile("./Arch_Analytics/Arch_32/ArchAmazonKinesisDataStreams32.js", replaced, function (err) {
-            if (err) throw err;
-        })
-	}
-);
-*/
+		fs.writeFile(path, replaced, function (err) {
+			if (err) throw err;
+		});
+	});
+};
