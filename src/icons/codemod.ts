@@ -26,8 +26,8 @@ var walk = function (dir, done) {
 };
 
 walk("./", (_, paths) => {
-	paths.forEach((path) => {
-		if (path.endsWith(".js") && !path.includes("index.js")) console.log(path);
+	paths.forEach((path, i) => {
+		if (path.endsWith(".js") && !path.includes("index.js") && i < 10) overWrite(path);
 	});
 });
 
