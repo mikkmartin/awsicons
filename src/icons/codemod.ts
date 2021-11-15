@@ -1,5 +1,39 @@
-const fs = require("fs");
+import { findLastKey } from "lodash";
 
+const fs = require("fs");
+var path = require("path");
+var walk = function (dir, done) {
+	var results = [];
+	fs.readdir(dir, function (err, list) {
+		if (err) return done(err);
+		var pending = list.length;
+		if (!pending) return done(null, results);
+		list.forEach(function (file) {
+			file = path.resolve(dir, file);
+			fs.stat(file, function (err, stat) {
+				if (stat && stat.isDirectory()) {
+					walk(file, function (err, res) {
+						results = results.concat(res);
+						if (!--pending) done(null, results);
+					});
+				} else {
+					results.push(file);
+					if (!--pending) done(null, results);
+				}
+			});
+		});
+	});
+};
+
+walk("./", (_, paths) => {
+	paths.forEach((path) => {
+		if (path.endsWith(".js")) {
+			console.log(path);
+		}
+	});
+});
+
+/*
 fs.readFile(
 	"./Arch_Analytics/Arch_32/ArchAmazonKinesisDataStreams32.js",
 	"utf-8",
@@ -33,12 +67,9 @@ fs.readFile(
 			.replace(props, 'viewBox="0 0 40 40"')
 			.replace(background, "")
 			.replace('fill="#FFF"', fillAttr);
-		console.log(replaced);
-		/*
-    fs.writeFile('.//Arch_Analytics/Arch_32/ArchAmazonKinesisDataStreams32.js', data.replace(/ArchAmazonKinesisDataStreams/g, 'ArchAmazonKinesisDataStreams32'), function (err) {
-        if (err) throw err;
-        console.log('Replaced!');
-    }
-    */
+        fs.writeFile("./Arch_Analytics/Arch_32/ArchAmazonKinesisDataStreams32.js", replaced, function (err) {
+            if (err) throw err;
+        })
 	}
 );
+*/
