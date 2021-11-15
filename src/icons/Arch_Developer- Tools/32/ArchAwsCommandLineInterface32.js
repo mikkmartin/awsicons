@@ -2,7 +2,7 @@ import * as React from "react";
 
 function SvgArchAwsCommandLineInterface32(props) {
 	return (
-		<svg width={40} height={40} xmlns="http://www.w3.org/2000/svg" {...props}>
+		<svg width={40} height={40} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" {...props}>
 			<defs>
 				<linearGradient
 					x1="0%"
@@ -16,13 +16,9 @@ function SvgArchAwsCommandLineInterface32(props) {
 				</linearGradient>
 			</defs>
 			<g fill="none" fillRule="evenodd">
-				<path
-					d="M0 0h40v40H0z"
-					fill="url(#Arch_AWS-Command-Line-Interface_32_svg__a)"
-				/>
-				<path
+								<path
 					d="M6 7v27h17v-1H7V12h26v21h-3v1h4V7H6zm1 4h26V8H7v3zm6-1h1V9h-1v1zm-2 0h1V9h-1v1zm-2 0h1V9H9v1zm1.647 8.354L15.293 23l-4.646 4.647.706.706L16.707 23l-5.354-5.354-.706.708zM19 26h9v-1h-9v1z"
-					fill="#FFF"
+					fill="url(#Arch_AWS-Command-Line-Interface_32_svg__a)"
 				/>
 			</g>
 		</svg>
