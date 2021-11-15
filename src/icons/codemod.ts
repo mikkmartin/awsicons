@@ -27,7 +27,7 @@ var walk = function (dir, done) {
 
 walk("./", (_, paths) => {
 	paths.forEach((path, i) => {
-		if (path.endsWith(".js") && !path.includes("index.js") && i < 10) overWrite(path);
+		if (path.endsWith(".js") && !path.includes("index.js") && i >= 200 && i < 300) overWrite(path);
 	});
 });
 
@@ -49,9 +49,10 @@ const overWrite = (path) => {
 			backgroundIndexes.end
 		);
 		const fillIndexes = {
-			start: background.indexOf('fill="'),
+			start: background.indexOf('fill="url('),
 			end: background.indexOf(')"') + 2,
 		};
+        if (fillIndexes.start === -1) return; console.warn(`file: ${path} didn't have correct fill.`);
 		const fillAttr = background.substring(fillIndexes.start, fillIndexes.end);
 		const propsIndexes = {
 			start: data.indexOf("{...props}"),
