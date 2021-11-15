@@ -1,7 +1,6 @@
-import { findLastKey } from "lodash";
-
 const fs = require("fs");
-var path = require("path");
+const path = require("path");
+
 var walk = function (dir, done) {
 	var results = [];
 	fs.readdir(dir, function (err, list) {
@@ -27,7 +26,7 @@ var walk = function (dir, done) {
 
 walk("./", (_, paths) => {
 	paths.forEach((path, i) => {
-		if (path.endsWith(".js") && !path.includes("index.js") && i >= 200 && i < 300) overWrite(path);
+		if (path.endsWith(".js") && !path.includes("index.js")) overWrite(path);
 	});
 });
 
@@ -60,7 +59,7 @@ const overWrite = (path) => {
 		};
 		const props = data.substring(propsIndexes.start, propsIndexes.end);
 		const replaced = data
-			.replace(props, 'viewBox="0 0 40 40"')
+			.replace(props, 'viewBox="0 0 40 40" {...props}')
 			.replace(background, "")
 			.replace('fill="#FFF"', fillAttr);
 		fs.writeFile(path, replaced, function (err) {
